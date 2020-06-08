@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <iomanip>
 #include <string>
+
 using namespace std;
 class trainstation
 {
@@ -15,18 +16,14 @@ public:
     trainstation() {}
     void set(trainstation v[]);
     void show(trainstation v[]);
-
 };
 class Train
 {
-
     string on_dest;//пункт отправки
-    string destination; //пункт назначение 
-    char departure;// выезд , отправка 
+    string destination; //пункт назначение
+    char departure;// выезд , отправка
     char time;//время , прибытия
-    int vagon;//колво вагонов 
-
-
+    int vagon;//колво вагонов
 
 public:
 
@@ -34,18 +31,17 @@ public:
     Train() {}
     void set2();
     void show_Train()const;
-
-
 };
-
 
 class Vagon
 {
 
-    string tipe;//тип вагона 
-    int mest;//колво мест 
+    string tipe;//тип вагона
+    int mest;//колво мест
     int new_mest;//колво свободных мест
+
 public:
+
     Vagon(int v, string t, int m, int nm) :tipe(t), mest(m), new_mest(nm) {}
     Vagon() {}
     void set_Vagon();
@@ -60,18 +56,17 @@ class Passenger
     char surname[20]; //фамилия пассажира
     char gender[20];//пол
     int age;//возраст
-    int pasport;//номер паспорта 
+    int pasport;//номер паспорта
+
 public:
+  
     void set_Passenger();
     void show_Passenger()const;
 
 };
 
-
 void Train::set2()
 {
-
-
     {
         cout << "Введите пункт отбытия: ";
         cin.get();
@@ -99,19 +94,16 @@ void Train::set2()
             cout << "Error\n\n";
             cout << "Введите количество вагонов: ";
         }
-
     }
 }
 void Train::show_Train()const
 {
-
     {
         cout << "Пункт отбытия: " << on_dest << endl;
         cout << "Пункт назначения:  " << destination << endl;
         cout << "Время отбытия:  " << departure << endl;
         cout << "Время прибытия:  " << time << endl;
         cout << "Количество вагонов:  " << vagon << endl;
-
     }
 }
 
@@ -141,8 +133,6 @@ void Vagon::set_Vagon()
     cin >> mest;
     cout << "количество свободных мест :" << endl;
     cin >> new_mest;
-
-
 }
 void Vagon::show_Vagon()const
 {
@@ -176,7 +166,6 @@ void Passenger::set_Passenger()
     cin >> age;
     cout << "введите номер паспорта: " << endl;
     cin >> pasport;
-
 }
 
 void Passenger::show_Passenger()const
