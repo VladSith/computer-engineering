@@ -1,0 +1,4 @@
+﻿  Курсовая КИ.cpp
+C:\Users\dogpe\Documents\GitHub\computer-engineering\Курсовая КИ\Курсовая КИ.cpp(130,14): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\dogpe\Documents\GitHub\computer-engineering\Курсовая КИ\Курсовая КИ.cpp(133,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Курсовая КИ.vcxproj -> C:\Users\dogpe\Documents\GitHub\computer-engineering\x64\Debug\Курсовая КИ.exe

@@ -8,6 +8,7 @@
 using namespace std;
 class trainstation
 {
+    
     int peronquantity;//колво перронов peronquantity
     string peron;// название перрона
 
@@ -19,34 +20,35 @@ public:
 };
 class Train
 {
+    
     string on_dest;//пункт отправки
     string destination; //пункт назначение
-    char departure;// выезд , отправка
-    char time;//время , прибытия
-    int vagon;//колво вагонов
+    double departure;// выезд , отправка
+    double time;//время , прибытия
+    int Сarriage = 15;//колво вагонов
 
 public:
 
-    Train(string on, string de, int d, int t, int v) : on_dest(on), destination(de), departure(d), time(t), vagon(v) {}
+    Train(string on, string de, int d, int t, int c) : on_dest(on), destination(de), departure(d), time(t), Сarriage(c) {}
     Train() {}
     void set2();
     void show_Train()const;
 };
 
-class Vagon
+class Сarriage
 {
 
     string tipe;//тип вагона
-    int mest;//колво мест
-    int new_mest;//колво свободных мест
+    int seat;//колво мест
+    int loose_seat;//колво свободных мест
 
 public:
 
-    Vagon(int v, string t, int m, int nm) :tipe(t), mest(m), new_mest(nm) {}
-    Vagon() {}
-    void set_Vagon();
-    void show_Vagon()const;
-    void buy_Vagon();
+    Сarriage(int v, string t, int m, int nm) :tipe(t), seat(m), loose_seat(nm) {}
+    Сarriage() {}
+    void set_Сarriage();
+    void show_Сarriage()const;
+    void buy_Seat();
 
 };
 class Passenger
@@ -88,12 +90,6 @@ void Train::set2()
             cout << "Error\n\n";
             cout << "Введите время в пути: ";
         }
-        cout << "Введите количество вагонов: ";
-        while (!(cin >> vagon) || vagon < 1 || vagon>10000)
-        {
-            cout << "Error\n\n";
-            cout << "Введите количество вагонов: ";
-        }
     }
 }
 void Train::show_Train()const
@@ -103,17 +99,15 @@ void Train::show_Train()const
         cout << "Пункт назначения:  " << destination << endl;
         cout << "Время отбытия:  " << departure << endl;
         cout << "Время прибытия:  " << time << endl;
-        cout << "Количество вагонов:  " << vagon << endl;
+        cout << "Количество вагонов:  " << Сarriage << endl;
     }
 }
 
 void trainstation::set(trainstation v[])
 {
-    cout << "Введите количество перронов:" << endl;
-    cin >> peronquantity;
     for (int i = 0; i < peronquantity; i++)
     {
-        cout << "Введите название перрона : " << endl;
+        cout << "Введите номер перрона: " << endl;
         cin >> v[i].peron;
     }
 }
@@ -125,23 +119,28 @@ void trainstation::show(trainstation v[])
         cout << "Название перрона: " << v[i].peron << endl;
     }
 }
-void Vagon::set_Vagon()
+void Сarriage::set_Сarriage()
 {
-    cout << "тип вагона :" << endl;
+    cout << "Тип вагона: " << endl;
     cin >> tipe;
-    cout << "количество мест :" << endl;
-    cin >> mest;
-    cout << "количество свободных мест :" << endl;
-    cin >> new_mest;
+    if (tipe == "Купе" || tipe=="Купэ") {
+        seat = 36;
+    }
+    else{
+        seat == 54;
+    }
+    
+    srand(time(NULL));
+    loose_seat = rand() % seat;
 }
-void Vagon::show_Vagon()const
+void Сarriage::show_Сarriage()const
 {
-    cout << "Тип вагона : " << tipe << endl;
-    cout << "Количество мест : " << mest << endl;
-    cout << "Количество свободных мест: " << new_mest << endl;
+    cout << "Тип вагона: " << tipe << endl;
+    cout << "Количество мест: " << seat << endl;
+    cout << "Количество свободных мест: " << loose_seat << endl;
 
 }
-void Vagon::buy_Vagon()
+void Сarriage::buy_Seat()
 {
     int n;
     int ticket;
@@ -149,22 +148,20 @@ void Vagon::buy_Vagon()
     cin >> ticket;
     for (int i = 0; i < ticket; i++)
     {
-        n = new_mest - ticket;
+        n = loose_seat - ticket;
     }
-    cout << "Колво оставшихся свободных мест" << n << endl;
+    cout << "Колво оставшихся свободных мест: " << n << endl;
 }
 
 void Passenger::set_Passenger()
 {
-    cout << "введите имя: " << endl;
-    cin >> name;
-    cout << "введите фамилию: " << endl;
-    cin >> surname;
-    cout << "введите пол пассажира: " << endl;
+    cout << "Фамилия и имя пассажира: " << endl;
+    cin >> surname >> name;
+    cout << "Введите пол пассажира: " << endl;
     cin >> gender;
-    cout << "введите возраст пассажира: " << endl;
+    cout << "Введите возраст пассажира: " << endl;
     cin >> age;
-    cout << "введите номер паспорта: " << endl;
+    cout << "Введите номер паспорта: " << endl;
     cin >> pasport;
 }
 
@@ -174,6 +171,9 @@ void Passenger::show_Passenger()const
     cout << "Фамилия:  " << surname << endl;
     cout << "Пол:  " << gender << endl;
     cout << "Возраст:  " << age << endl;
+    if (age < 14) {
+        cout << "Дети путешествую только в сопровождении родителей";
+    }
     cout << "Номер паспорта:  " << pasport << endl;
 }
 
@@ -181,35 +181,35 @@ int main() {
     system("chcp 1251");
 
     Passenger A;
-    cout << "Введите информацию о пассажире: " << endl;
+    cout << "Введите информацию о пассажире" << endl;
     cout << endl;
     A.set_Passenger();
-    cout << "Информация о пассажире: " << endl;
+    cout << "Информация о пассажире" << endl;
     cout << endl;
     A.show_Passenger();
     cout << endl;
-    Vagon B;
-    cout << "Введите информацию о вагоне: " << endl;
+    Сarriage B;
+    cout << "Введите информацию о вагоне" << endl;
     cout << endl;
-    B.set_Vagon();
-    cout << "Информация о вагоне: " << endl;
+    B.set_Сarriage();
+    cout << "Информация о вагоне" << endl;
     cout << endl;
-    B.show_Vagon();
+    B.show_Сarriage();
     cout << endl;
-    B.buy_Vagon();
+    B.buy_Seat();
     cout << endl;
     Train C;
-    cout << "Заполните список сведениями о поезде:" << endl;
+    cout << "Заполните список сведениями о поезде" << endl;
     C.set2();
     C.show_Train();
     cout << endl;
     cin.get();
     trainstation D;
     cout << "Заполните данные о перронах:" << endl;
-    trainstation* v = new trainstation;
-    D.set(v);
+    trainstation* с = new trainstation;
+    D.set(с);
     cout << endl;
-    D.show(v);
+    D.show(с);
     cin.get();
     return 0;
 }
